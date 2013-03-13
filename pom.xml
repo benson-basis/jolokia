@@ -329,8 +329,8 @@
   </issueManagement>
 
   <scm>
-    <connection>scm:git:git://github.com/rhuss/jolokia.git</connection>
-    <developerConnection>scm:git:ssh://git@github.com/rhuss/jolokia.git</developerConnection>
+    <connection>scm:git:git://github.com/benson-basis/jolokia.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/benson-basis/jolokia.git</developerConnection>
     <tag>HEAD</tag>
     <url>git://github.com/rhuss/jolokia.git</url>
   </scm>
