@@ -19,7 +19,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.jolokia</groupId>
   <artifactId>jolokia</artifactId>
-  <version>1.1.1-SNAPSHOT</version>
+  <version>1.1.1-basis-SNAPSHOT</version>
   <name>jolokia-parent</name>
   <description>jolokia parent pom</description>
 
@@ -426,12 +426,13 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <currentStableVersion>1.1.0</currentStableVersion>
-    <currentSnapshotVersion>1.1.1-SNAPSHOT</currentSnapshotVersion>
+    <currentSnapshotVersion>1.1.1-basis-SNAPSHOT</currentSnapshotVersion>
     <sonar.host.url>http://labs.consol.de/sonar</sonar.host.url>
     <sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
   </properties>
 
   <repositories>
+<!--
     <repository>
       <id>sonatype-nexus-snapshots</id>
       <name>Sonatype Nexus Snapshots</name>
@@ -445,21 +446,21 @@
         <enabled>true</enabled>
       </snapshots>
     </repository>
+-->
   </repositories>
 
   <distributionManagement>
-    <snapshotRepository>
-      <id>sonatype-nexus-snapshots</id>
-      <name>Sonatype Nexus Snapshots</name>
-      <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-    </snapshotRepository>
-    <repository>
-      <id>sonatype-nexus-staging</id>
-      <name>Nexus Release Repository</name>
-      <url>
-        https://oss.sonatype.org/service/local/staging/deploy/maven2/
-      </url>
-    </repository>
+        <repository>
+            <id>basistech.repo</id>
+            <name>Basis Local Repository</name>
+            <url>http://maven.basistech.net/nexus/content/repositories/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>basistech.snapshot.repo</id>
+            <name>Basistech Local Snapshot Repository</name>
+            <url>http://maven.basistech.net/nexus/content/repositories/snapshots/</url>
+            <uniqueVersion>false</uniqueVersion>
+        </snapshotRepository>
   </distributionManagement>
   
   <profiles>
