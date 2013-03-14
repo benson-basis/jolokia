@@ -147,28 +147,18 @@ public class JolokiaServer {
 
         // Create proper context along with handler
         final String contextPath = config.getContextPath();
-        jolokiaHttpHandler = newJolokiaHttpHandler();
+        jolokiaHttpHandler = new JolokiaHttpHandler(config.getJolokiaConfig());
         HttpContext context = httpServer.createContext(contextPath, jolokiaHttpHandler);
 
         // Special customizations
         addAuthenticatorIfNeeded(config.getUser(),config.getPassword(),context);
         initializeExecutor();
 
-        if (port == 0) {
-            port = httpServer.getAddress().getPort();
-        }
-
-        url = String.format("%s://%s:%d%s",protocol,address.getCanonicalHostName(),port,contextPath);
+        InetSocketAddress realSocketAddress = httpServer.getAddress();
+        InetAddress realAddress = realSocketAddress.getAddress() != null ? realSocketAddress.getAddress() : address;
+        url = String.format("%s://%s:%d%s",
+                            protocol,realAddress.getCanonicalHostName(),realSocketAddress.getPort(),contextPath);
     }
-
-    /**
-     * A subclass may override this to customize the handler; for example, to arrange for CORS headers.
-     * @return some instance of JolokiaHttpHandler or a subclass.
-     */
-    protected JolokiaHttpHandler newJolokiaHttpHandler() {
-        return new JolokiaHttpHandler(config.getJolokiaConfig());
-    }
-
 
     private void addAuthenticatorIfNeeded(final String user, final String password, HttpContext pContext) {
         if (user != null) {
